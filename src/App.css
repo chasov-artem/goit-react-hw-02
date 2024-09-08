@@ -1,60 +1,6 @@
-.app-container {
-  max-width: 600px;
+#root {
+  max-width: 1280px;
   margin: 0 auto;
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 10px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
   text-align: center;
-}
-
-h1 {
-  color: #333;
-  margin-bottom: 20px;
-}
-
-p {
-  color: #555;
-}
-
-button {
-  margin: 5px;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  background-color: #4caf50;
-  color: white;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-button:hover {
-  background-color: #45a049;
-}
-
-button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
-.reset-button {
-  background-color: #f44336;
-}
-
-.reset-button:hover {
-  background-color: #d32f2f;
-}
-
-.statistics {
-  margin-top: 20px;
-}
-
-.statistics p {
-  font-size: 18px;
-  color: #333;
-}
-
-.notification {
-  color: #f44336;
-  font-size: 18px;
 }
