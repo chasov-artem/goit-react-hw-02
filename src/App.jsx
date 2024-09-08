@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-// import Notification from "./components/Notification/Notification";
-// import Feedback from "./components/Feedback/Feedback";
-// import Options from "./components/Options/Options";
+import Feedback from "./components/Feedback/Feedback";
+import Options from "./components/Options/Options";
+import Notification from "./components/Notification/Notification";
 
 const App = () => {
   const [feedback, setFeedback] = useState({
@@ -9,8 +9,6 @@ const App = () => {
     neutral: 0,
     bad: 0,
   });
-
-  const totalFeedback = feedback.good + feedback.neutral + feedback.bad;
 
   useEffect(() => {
     const savedFeedback = JSON.parse(localStorage.getItem("feedback"));
@@ -30,6 +28,16 @@ const App = () => {
     }));
   };
 
+  const totalFeedback = feedback.good + feedback.neutral + feedback.bad;
+
+  const positiveFeedback =
+    Math.round((feedback.good / totalFeedback) * 100) || 0;
+
+  const resetFeedback = () => {
+    setFeedback({ good: 0, neutral: 0, bad: 0 });
+    localStorage.removeItem("feedback");
+  };
+
   return (
     <div>
       <h1>Sip Happens Café</h1>
@@ -37,19 +45,19 @@ const App = () => {
         Please leave your feedback about our service by selecting one of the
         options below.
       </p>
-      <button onClick={() => updateFeedback("good")}>Good</button>
-      <button onClick={() => updateFeedback("neutral")}>Neutral</button>
-      <button onClick={() => updateFeedback("bad")}>Bad</button>
-
+      <Options
+        updateFeedback={updateFeedback}
+        totalFeedback={totalFeedback}
+        resetFeedback={resetFeedback}
+      />
       {totalFeedback > 0 ? (
-        <div>
-          <h2>Feedback Statistics</h2>
-          <p>Good: {feedback.good}</p>
-          <p>Neutral: {feedback.neutral}</p>
-          <p>Bad: {feedback.bad}</p>
-        </div>
+        <Feedback
+          feedback={feedback}
+          totalFeedback={totalFeedback}
+          positiveFeedback={positiveFeedback}
+        />
       ) : (
-        <p>No feedback given yet</p>
+        <Notification message="No feedback given yet" />
       )}
     </div>
   );
